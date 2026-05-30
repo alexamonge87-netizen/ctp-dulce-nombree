@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CTP Dulce Nombre – Especialidades Técnicas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #0B1340;
+      --blue: #1A3A8F;
+      --sky: #4C8FD6;
+      --gold: #F5A623;
+      --cream: #FDF8F0;
+      --white: #ffffff;
+      --gray: #6B7280;
+      --light: #F3F6FB;
+      --card-shadow: 0 8px 40px rgba(11,19,64,0.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 999;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 68px;
+      background: rgba(11,19,64,0.96);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: 0.5px;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.80);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-burger span { width: 26px; height: 2.5px; background: white; border-radius: 2px; transition: 0.3s; }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    #inicio {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0B1340 0%, #1A3A8F 60%, #2a5caa 100%);
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding-top: 68px;
+    }
+    .hero-shapes {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    .hero-shapes::before {
+      content: '';
+      position: absolute; right: -120px; top: -80px;
+      width: 560px; height: 560px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(76,143,214,0.25) 0%, transparent 70%);
+    }
+    .hero-shapes::after {
+      content: '';
+      position: absolute; left: -60px; bottom: -80px;
+      width: 380px; height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,166,35,0.15) 0%, transparent 70%);
+
+
+    }
+    .hero-grid {
+      width: 100%; max-width: 1200px; margin: 0 auto;
+      padding: 42px 5vw 80px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 4rem;
+      position: relative; z-index: 2;
+    }
+    .hero-content {
+      padding-left: 3rem;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(245,166,35,0.18);
+      border: 1px solid rgba(245,166,35,0.5);
+      color: var(--gold);
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 20px;
+      margin-bottom: 1.2rem;
+    }
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    .hero-title span { color: var(--gold); }
+    .hero-desc {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.05rem; line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--navy);
+      padding: 13px 30px; border-radius: 8px;
+      font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(245,166,35,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(245,166,35,0.45); }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.35);
+      color: white; padding: 13px 30px; border-radius: 8px;
+      font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.07); }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .stat-box {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; padding: 18px 14px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem; font-weight: 800; color: var(--gold);
+    }
+    .stat-label { color: rgba(255,255,255,0.65); font-size: 0.8rem; margin-top: 2px; }
+
+    .hero-visual {
+      display: flex; justify-content: center; align-items: center;
+    }
+    .hero-emblem {
+      width: 340px; height: 340px;
+      background: rgba(255,255,255,0.06);
+      border: 2px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.8rem;
+      position: relative;
+    }
+    .hero-emblem::before {
+      content: '';
+      position: absolute; inset: -14px;
+      border-radius: 50%;
+      border: 1px dashed rgba(245,166,35,0.4);
+      animation: spin 20s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .emblem-icon {
+      font-size: 5rem; line-height: 1;
+    }
+    .emblem-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: white; text-align: center; letter-spacing: 1px;
+    }
+    .emblem-sub {
+      color: var(--gold); font-size: 0.8rem; letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ─── SECTIONS COMMON ──────────────────────────────── */
+    section { padding: 90px 5vw; }
+    .section-container { max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-tag {
+      display: inline-block;
+      background: rgba(26,58,143,0.10);
+      color: var(--blue);
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; color: var(--navy);
+      line-height: 1.15; margin-bottom: 0.8rem;
+    }
+    .section-sub {
+      color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto;
+    }
+    .divider {
+      width: 60px; height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--sky));
+      border-radius: 2px; margin: 1rem auto 0;
+    }
+
+    /* ─── ESPECIALIDADES ───────────────────────────────── */
+    #especialidades { background: var(--light); }
+    .esp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+    .esp-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex; flex-direction: column;
+    }
+    .esp-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(11,19,64,0.14);
+    }
+    .esp-banner {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.8rem;
+      position: relative; overflow: hidden;
+    }
+    .esp-banner::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(0,0,0,0.12);
+    }
+    .esp-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .esp-tag {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 6px;
+      display: inline-block; margin-bottom: 0.8rem;
+    }
+    .esp-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.18rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 0.6rem;
+    }
+    .esp-motto {
+      font-size: 0.85rem; color: var(--sky);
+      font-style: italic; margin-bottom: 0.9rem;
+    }
+    .esp-desc {
+      color: var(--gray); font-size: 0.9rem;
+      line-height: 1.6; flex: 1; margin-bottom: 1.2rem;
+    }
+    .esp-skills { margin-bottom: 1.4rem; }
+    .esp-skills-title {
+      font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--navy); margin-bottom: 0.5rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      font-size: 0.75rem; padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--light); color: var(--navy);
+      font-weight: 500;
+    }
+    .esp-link {
+      display: block; text-align: center;
+      background: var(--navy); color: white;
+      padding: 11px; border-radius: 8px;
+      text-decoration: none; font-weight: 600;
+      font-size: 0.9rem; transition: background 0.2s;
+      margin-top: auto;
+    }
+    .esp-link:hover { background: var(--blue); }
+
+    /* ─── GALERÍA ──────────────────────────────────────── */
+    #galeria { background: var(--cream); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+    .gallery-item {
+      border-radius: 14px; overflow: hidden;
+      position: relative; cursor: pointer;
+      background: var(--light);
+    }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .gallery-item:nth-child(5) { grid-column: span 2; }
+    .gal-inner {
+      width: 100%; height: 100%; min-height: 180px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.6rem; padding: 1.5rem;
+      transition: transform 0.3s;
+    }
+    .gallery-item:hover .gal-inner { transform: scale(1.04); }
+    .gal-icon { font-size: 3rem; }
+    .gal-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 0.95rem;
+      color: var(--navy); text-align: center;
+    }
+    .gal-sub { font-size: 0.78rem; color: var(--gray); text-align: center; }
+    .gallery-item:nth-child(1) .gal-icon { font-size: 5rem; }
+    .gallery-item:nth-child(1) .gal-label { font-size: 1.3rem; }
+
+    /* color themes for gallery cells */
+    .gal-a { background: linear-gradient(135deg, #E8F4FF, #C8E0FF); }
+    .gal-b { background: linear-gradient(135deg, #FFF8E8, #FFE8B2); }
+    .gal-c { background: linear-gradient(135deg, #EAFAF0, #B8F0CE); }
+    .gal-d { background: linear-gradient(135deg, #F8E8FF, #DDBCF5); }
+    .gal-e { background: linear-gradient(135deg, #FFE8E8, #FFBCBC); }
+    .gal-f { background: linear-gradient(135deg, #E8F0FF, #B2C8FF); }
+
+    /* ─── ACERCA ───────────────────────────────────────── */
+    #acerca { background: var(--navy); position: relative; overflow: hidden; }
+    #acerca::before {
+      content: '';
+      position: absolute; right: -150px; top: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(76,143,214,0.15) 0%, transparent 70%);
+    }
+    .acerca-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      position: relative; z-index: 2;
+    }
+    #acerca .section-tag { background: rgba(245,166,35,0.15); color: var(--gold); }
+    #acerca .section-title { color: var(--white); }
+    #acerca .section-sub { color: rgba(255,255,255,0.65); }
+    #acerca .divider { background: linear-gradient(90deg, var(--gold), transparent); }
+    .acerca-text { text-align: left; }
+    .acerca-text .section-header { text-align: left; }
+    .acerca-text .divider { margin: 1rem 0 0; }
+    .acerca-historia {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.97rem; line-height: 1.75;
+      margin-top: 1.5rem; margin-bottom: 2rem;
+    }
+    .mv-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .mv-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 14px; padding: 1.5rem;
+    }
+    .mv-icon { font-size: 1.8rem; margin-bottom: 0.7rem; }
+    .mv-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; color: var(--gold);
+      font-size: 1rem; margin-bottom: 0.5rem;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .mv-text { color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.6; }
+
+    .acerca-info {
+      display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    .info-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.5rem;
+    }
+    .info-card-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; color: white;
+      font-size: 0.95rem; margin-bottom: 0.4rem;
+    }
+    .info-card-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.88rem; line-height: 1.6;
+    }
+    .quote-block {
+      background: rgba(245,166,35,0.10);
+      border: 1px solid rgba(245,166,35,0.25);
+      border-radius: 14px; padding: 1.5rem;
+      position: relative;
+    }
+    .quote-block::before {
+      content: '"';
+      font-family: 'Syne', sans-serif;
+      font-size: 5rem; color: var(--gold);
+      opacity: 0.3; position: absolute;
+      top: -10px; left: 16px; line-height: 1;
+    }
+    .quote-text {
+      color: rgba(255,255,255,0.80); font-size: 0.95rem;
+      line-height: 1.7; padding-top: 1rem;
+    }
+    .quote-author {
+      margin-top: 0.8rem; color: var(--gold);
+      font-weight: 600; font-size: 0.88rem;
+    }
+
+    /* ─── FOOTER ───────────────────────────────────────── */
+    footer {
+      background: #070D2A;
+      padding: 50px 5vw 30px;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-brand {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 800;
+      color: white;
+    }
+    .footer-brand span { color: var(--gold); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none; font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.8rem; text-align: center; width: 100%; margin-top: 1.5rem;
+      padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.07); }
+
+    /* ─── MOBILE ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-grid, .acerca-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-visual { display: none; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+      .gallery-item:nth-child(5) { grid-column: span 2; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: fixed; top: 68px; left: 0; right: 0;
+        background: rgba(11,19,64,0.98);
+        padding: 1.5rem 5vw;
+        gap: 1.2rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:nth-child(1), .gallery-item:nth-child(5) { grid-column: span 1; }
+      .mv-cards { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ─── SCROLL ANIMATIONS ─────────────────────────────── */
+    .fade-in {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── BOTÓN FLOTANTE REGISTRO ───────────────────────── */
+    .btn-registro-flotante {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      z-index: 1000;
+      background: linear-gradient(135deg, var(--gold), #e8920a);
+      color: var(--navy);
+      border: none;
+      padding: 15px 26px;
+      border-radius: 50px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 6px 28px rgba(245,166,35,0.50);
+      display: flex; align-items: center; gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.3px;
+    }
+    .btn-registro-flotante:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(245,166,35,0.60);
+    }
+    .btn-registro-flotante .reg-icon { font-size: 1.1rem; }
+
+    /* ─── MODAL REGISTRO ────────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(7,13,42,0.75);
+      backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: var(--white);
+      border-radius: 20px;
+      width: 100%; max-width: 580px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 30px 80px rgba(7,13,42,0.35);
+      animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+      from { opacity:0; transform: translateY(30px) scale(0.97); }
+      to   { opacity:1; transform: translateY(0) scale(1); }
+    }
+    .modal-header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      padding: 28px 32px 24px;
+      border-radius: 20px 20px 0 0;
+      position: relative;
+    }
+    .modal-header-tag {
+      display: inline-block;
+      background: rgba(245,166,35,0.20);
+      border: 1px solid rgba(245,166,35,0.45);
+      color: var(--gold);
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 0.7rem;
+    }
+    .modal-header h2 {
+      font-family: 'Syne', sans-serif;
+      color: white; font-size: 1.45rem; font-weight: 800;
+      margin-bottom: 0.3rem;
+    }
+    .modal-header p {
+      color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.5;
+    }
+    .modal-close {
+      position: absolute; top: 18px; right: 20px;
+      background: rgba(255,255,255,0.12);
+      border: none; color: white;
+      width: 34px; height: 34px;
+      border-radius: 50%; cursor: pointer;
+      font-size: 1.1rem; display: flex;
+      align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.22); }
+    .modal-body { padding: 28px 32px 32px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--navy); margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+    .form-group label span { color: #C72A2A; margin-left: 2px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1.5px solid #D8E0EF;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      color: var(--navy);
+      background: #FAFBFD;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--sky);
+      box-shadow: 0 0 0 3px rgba(76,143,214,0.15);
+      background: white;
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-group select { appearance: none; cursor: pointer; }
+    .form-divider {
+      border: none; border-top: 1.5px solid var(--light);
+      margin: 20px 0;
+    }
+    .form-section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--blue); margin-bottom: 14px;
+    }
+    .form-check-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; margin-bottom: 16px;
+    }
+    .form-check {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--light); border-radius: 8px;
+      padding: 9px 12px; cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .form-check:hover { border-color: var(--sky); background: #EEF5FF; }
+    .form-check input[type="checkbox"] {
+      width: 16px; height: 16px;
+      accent-color: var(--blue);
+      flex-shrink: 0;
+      border: none; padding: 0; background: none;
+      box-shadow: none;
+    }
+    .form-check input[type="checkbox"]:focus { box-shadow: none; border-color: transparent; }
+    .form-check-label {
+      font-size: 0.82rem; color: var(--navy); font-weight: 500; line-height: 1.3;
+    }
+    .btn-submit {
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: white; border: none;
+      border-radius: 12px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(26,58,143,0.30);
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 8px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,58,143,0.40); }
+
+    /* ─── MODAL ÉXITO ───────────────────────────────────── */
+    .modal-success {
+      display: none;
+      flex-direction: column; align-items: center;
+      text-align: center; padding: 48px 32px;
+    }
+    .modal-success.active { display: flex; }
+    .success-icon {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem; margin-bottom: 1.2rem;
+      box-shadow: 0 8px 24px rgba(34,197,94,0.30);
+    }
+    .success-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem; font-weight: 800;
+      color: var(--navy); margin-bottom: 0.6rem;
+    }
+    .success-desc { color: var(--gray); font-size: 0.95rem; line-height: 1.6; max-width: 340px; }
+    .btn-close-success {
+      margin-top: 24px;
+      background: var(--gold); color: var(--navy);
+      border: none; padding: 12px 32px;
+      border-radius: 50px; font-family: 'Syne', sans-serif;
+      font-weight: 700; cursor: pointer;
+      font-size: 0.9rem;
+      transition: transform 0.2s;
+    }
+    .btn-close-success:hover { transform: translateY(-2px); }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .form-check-grid { grid-template-columns: 1fr; }
+      .modal-body { padding: 22px 20px 28px; }
+      .modal-header { padding: 22px 20px 18px; }
+      .btn-registro-flotante { bottom: 20px; right: 20px; padding: 13px 20px; font-size: 0.88rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" style="display: flex; align-items: center; gap: 10px;">
+    <img src="images/logocole.png" alt="Logo CTP" style="height: 40px; width: auto; object-fit: contain;">
+    
+    <span>CTP Dulce Nombre</span>
+  </div>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#slider">Inicio</a></li>
+    <li><a href="#especialidades">Especialidades</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#acerca">Acerca del Colegio</a></li>
+  </ul>
+  
+  <div class="nav-burger" id="burger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+</nav>
+
+<!-- HERO / INICIO -->
+<section id="slider" class="slider-element min-vh-60 min-vh-md-100 dark" style="overflow: hidden; background: url('esp/cole.jpg') no-repeat center center;background-size: cover;">
+      <div class="slider-inner">
+  <div class="hero-shapes"></div>
+  <div class="hero-grid">
+    <div class="hero-content fade-in">
+     <div class="hero-tag" style="display: inline-block; background: #011C40; color: #ffffff; padding: 6px 14px; border-radius: 30px; font-size: 13px; font-weight: bold; box-sizing: border-box;">📍 Proceso Vocacional 2026-2027</div>
+     <h1 class="hero-title" style="color: #ffffff;">
+    Tu futuro<br>
+    empieza<br>
+    <span style="color: #C72A2A;">aquí.</span>
+</h1>
+      <p class="hero-desc">
+        El <strong style="color:white">Colegio Técnico Profesional Dulce Nombre</strong> te ofrece
+       especialidades técnicas para que elijas el camino que transforme tu vida.
+      </p>
+      <div class="hero-btns">
+    <a href="#especialidades" class="btn-primary">Ver Especialidades</a>
+    <!-- Modificado aquí con el atributo style -->
+    <a href="#acerca" class="btn-outline" style="background-color: #e3f2fd; color: #2E2E2E; border: 1px solid #bbdefb; padding: 10px 20px; text-decoration: none; border-radius: 6px; display: inline-block;">Conocer el Colegio</a>
+</div>
+  
+  </div>
+</section>
+
+<!-- ESPECIALIDADES -->
+<section id="especialidades">
+  <div class="section-container">
+    <div class="section-header fade-in">
+      <div class="section-tag">Oferta Académica</div>
+      <h2 class="section-title">Nuestras Especialidades Técnicas</h2>
+      <p class="section-sub">Cada especialidad te prepara con habilidades y perfil de egreso para el mundo laboral y la educación superior.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="esp-grid">
+
+      <!-- 1. Contabilidad -->
+      <div class="esp-card fade-in">
+        <div class="esp-banner" style="background: linear-gradient(135deg,#1A3A8F,#4C8FD6);">
+          <img src="esp/conta.jpg" alt="Contabilidad" width="500" height="300" style="border-radius: 20px; border-style: Outset; border-color: #011C40;">
+        </div>
+        <div class="esp-body" style="display: flex; flex-direction: column; height: 100%;">
+          <span class="esp-tag" style="background:#AAD5F2;color:#000000;">Empresarial</span>
+          <h3 class="esp-name">Contabilidad</h3>
+          <p class="esp-motto">"El lenguaje de los negocios"</p>
+          <p class="esp-desc">Disciplina financiera que permite registrar y analizar transacciones económicas de empresas y organizaciones para conocer su situación patrimonial.</p>
+          
+          <div class="esp-skills">
+            <div class="esp-skills-title">Habilidades del Egresado</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Estados Financieros</span>
+              <span class="skill-tag">Costos y Presupuestos</span>
+              <span class="skill-tag">Tributación</span>
+              <span class="skill-tag">Auditoría Básica</span>
+            </div>
+          </div>
+          
+          <div class="esp-btn-container" style="margin-top: auto; padding-top: 10px; width: 100%;">
+            <a href="brochure/brochure_contabilidadd.html" class="brochure-link" style="display: block; text-align: center; text-decoration: none; color: white; background: #011C40; padding: 10px 15px; border-radius: 8px; font-size: 13.5px; font-weight: 500; box-sizing: border-box; transition: background 0.2s;">Más información →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Ciberseguridad -->
+      <div class="esp-card fade-in">
+        <div class="esp-banner" style="background: linear-gradient(135deg,#0B1340,#1A3A8F);">
+          <img src="esp/ciber.jpg" 
+    alt="Ciberseguridad" 
+    <img src="esp/ciber.jpg" 
+     alt="Ciberseguridad" 
+     width="500" 
+     height="330" 
+     style="border-radius: 20px; border-style: Outset; border-color: #011C40;">
+        </div>
+        <div class="esp-body">
+          <span class="esp-tag" style="background:#AACCF2;color:#000000;">Tecnología</span>
+          <h3 class="esp-name">Ciberseguridad</h3>
+          <p class="esp-motto">"Protegiendo el valor de los datos"</p>
+          <p class="esp-desc">Práctica de defender computadoras, servidores, redes y datos de ataques maliciosos. Un campo de alta demanda laboral global.</p>
+          <div class="esp-skills">
+            <div class="esp-skills-title">Habilidades del Egresado</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Ethical Hacking</span>
+              <span class="skill-tag">Redes Seguras</span>
+              <span class="skill-tag">Análisis Forense</span>
+              <span class="skill-tag">Criptografía</span>
+            </div>
+          </div>
+          <a href="#especialidades" class="esp-link">Más información →</a>
+        </div>
+      </div>
+
+      <!-- 3. Dibujo y Modelado -->
+      <div class="esp-card fade-in">
+        <div class="esp-banner" style="background: linear-gradient(135deg,#6B4C2A,#D4A055);">
+          <img src="esp/dibujo.jpg" 
+    alt="Dibujo" 
+    <img src="esp/dibujo.jpg" 
+     alt="Dibujo" 
+     width="500" 
+     height="330" 
+     style="border-radius: 20px; border-style: Outset; border-color: #011C40;">
+          <span style="position:relative;z-index:1;font-size:4rem;">🏗️</span>
+        </div>
+        <div class="esp-body">
+          <span class="esp-tag" style="background:#F7ECAD;color:#000000;">Construcción</span>
+          <h3 class="esp-name">Dibujo y Modelado de Edificaciones</h3>
+          <p class="esp-motto">"Edificando las bases del futuro"</p>
+          <p class="esp-desc">Creación de planos, diagramas y esquemas para edificios e infraestructura, permitiendo planificar proyectos residenciales y comerciales con precisión.</p>
+          <div class="esp-skills">
+            <div class="esp-skills-title">Habilidades del Egresado</div>
+            <div class="skill-tags">
+              <span class="skill-tag">AutoCAD</span>
+              <span class="skill-tag">Revit / BIM</span>
+              <span class="skill-tag">Planos Constructivos</span>
+              <span class="skill-tag">Topografía</span>
+            </div>
+          </div>
+          <a href="#especialidades" class="esp-link">Más información →</a>
+        </div>
+      </div>
+
+      <!-- 4. Electrónica Industrial -->
+      <div class="esp-card fade-in">
+        <div class="esp-banner" style="background: linear-gradient(135deg,#1C4A1C,#3A8A3A);">
+           <img src="esp/electro.jpg" 
+    alt="Electronica" 
+    <img src="esp/electro.jpg" 
+     alt="electro" 
+     width="500" 
+     height="330" 
+          <span style="position:relative;z-index:1;font-size:4rem;">⚙️</span>
+        </div>
+        <div class="esp-body">
+          <span class="esp-tag" style="background:#E8F5E8;color:#1C4A1C;">Industrial</span>
+          <h3 class="esp-name">Electrónica Industrial</h3>
+          <p class="esp-motto">"Transformando y mejorando la sociedad"</p>
+          <p class="esp-desc">Dirigida a jóvenes interesados en el sector industrial, con control electrónico de procesos de manufactura: motores, sensores, robótica y maquinaria.</p>
+          <div class="esp-skills">
+            <div class="esp-skills-title">Habilidades del Egresado</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Robótica</span>
+              <span class="skill-tag">PLCs</span>
+              <span class="skill-tag">Automatización</span>
+              <span class="skill-tag">Circuitos</span>
+            </div>
+          </div>
+          <a href="#especialidades" class="esp-link">Más información →</a>
+        </div>
+      </div>
+
+      <!-- 5. Ejecutivo Comercial -->
+      <div class="esp-card fade-in">
+        <div class="esp-banner" style="background: linear-gradient(135deg,#6A1A6A,#B84CB8);">
+          <img src="esp/ejecutivo.jpg" 
+    alt="Ejecutivo" 
+    <img src="esp/ejecutivo.jpg" 
+     alt="electro" 
+     width="500" 
+     height="330" 
+          <span style="position:relative;z-index:1;font-size:4rem;">💼</span>
+        </div>
+        <div class="esp-body">
+          <span class="esp-tag" style="background:#F8E8FF;color:#6A1A6A;">Comercio</span>
+          <h3 class="esp-name">Ejecutivo Comercial y Servicio al Cliente</h3>
+          <p class="esp-motto">"A smart choice!"</p>
+          <p class="esp-desc">El ejecutivo conecta la empresa con el cliente, atendiendo en inglés y español. Se desempeña en múltiples áreas administrativas siendo factor clave del éxito empresarial.</p>
+          <div class="esp-skills">
+            <div class="esp-skills-title">Habilidades del Egresado</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Inglés Comercial</span>
+              <span class="skill-tag">Ventas</span>
+              <span class="skill-tag">CRM</span>
+              <span class="skill-tag">Mercadeo</span>
+            </div>
+          </div>
+          <a href="#especialidades" class="esp-link">Más información →</a>
+        </div>
+      </div>
+
+      <!-- 6. Redes -->
+      <div class="esp-card fade-in">
+        <div class="esp-banner" style="background: linear-gradient(135deg,#1A4A6A,#2A7AA8);">
+          <img src="esp/redes.jpg" 
+    alt="Redes" 
+    <img src="esp/redes.jpg" 
+     alt="Redes" 
+     width="500" 
+     height="300" 
+     style="border-radius: 20px; border-style: Outset; border-color: #011C40;">
+          
+        </div>
+        <div class="esp-body">
+          <span class="esp-tag" style="background:#E0F0FF;color:#1A4A6A;">Tecnología</span>
+          <h3 class="esp-name">Redes de Información y Sistemas Operativos</h3>
+          <p class="esp-motto">"Conectando al mundo"</p>
+          <p class="esp-desc">La transformación digital genera alta demanda de especialistas en informática y telecomunicaciones. Aprende a configurar y dar soporte a infraestructuras de red.</p>
+          <div class="esp-skills">
+            <div class="esp-skills-title">Habilidades del Egresado</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Cisco / Routing</span>
+              <span class="skill-tag">Linux / Windows Server</span>
+              <span class="skill-tag">Soporte TI</span>
+              <span class="skill-tag">Cloud Básico</span>
+            </div>
+          </div>
+          <a href="#especialidades" class="esp-link">Más información →</a>
+        </div>
+      </div>
+
+      <!-- 7. Desarrollo Apps Móviles -->
+      <div class="esp-card fade-in">
+        <div class="esp-banner" style="background: linear-gradient(135deg,#8A1515,#D43030);">
+          <img src="esp/desarrollo2.png" 
+    alt="Desarrollo" 
+    <img src="esp/desarrollo2.png" 
+     alt="Desarrollo" 
+     width="500" 
+     height="350" 
+     style="border-radius: 20px; border-style: Outset; border-color: #011C40;">
+          <span style="position:relative;z-index:1;font-size:4rem;">📱</span>
+        </div>
+        <div class="esp-body">
+          <span class="esp-tag" style="background:#FFE8E8;color:#8A1515;">Programación</span>
+          <h3 class="esp-name">Desarrollo de Aplicaciones Móviles</h3>
+          <p class="esp-motto">"Si lo puedes imaginar, lo puedes programar"</p>
+          <p class="esp-desc">Adquiere conocimientos para generar aplicaciones nativas y WebApps, con énfasis en iOS y Android, funcionando con y sin conectividad.</p>
+          <div class="esp-skills">
+            <div class="esp-skills-title">Habilidades del Egresado</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Android / iOS</span>
+              <span class="skill-tag">JavaScript / Kotlin</span>
+              <span class="skill-tag">Bases de Datos</span>
+              <span class="skill-tag">APIs REST</span>
+            </div>
+          </div>
+         <div class="esp-btn-container" style="margin-top: auto; padding-top: 10px; width: 100%;">
+            <a href="brochure/brochure_apps.html" class="brochure-link" style="display: block; text-align: center; text-decoration: none; color: white; background: #011C40; padding: 10px 15px; border-radius: 8px; font-size: 13.5px; font-weight: 500; box-sizing: border-box; transition: background 0.2s;">Más información →</a>
+          </div>
+        </div>
+      </div>
+
+
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="section-container">
+    <div class="section-header fade-in">
+      <div class="section-tag">Vida Estudiantil</div>
+      <h2 class="section-title">Galería de Talleres y Proyectos</h2>
+      <p class="section-sub">Nuestros estudiantes aprenden haciendo. Aquí un vistazo a lo que se vive dentro del CTP.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item gal-a fade-in">
+        <div class="gal-inner">
+          <div class="gal-icon">🔬</div>
+          <div class="gal-label">Laboratorio de Tecnología</div>
+          <div class="gal-sub">Prácticas y experimentos de electrónica y redes</div>
+        </div>
+      </div>
+      <div class="gallery-item gal-b fade-in">
+        <div class="gal-inner">
+          <div class="gal-icon">💻</div>
+          <div class="gal-label">Taller de Programación</div>
+          <div class="gal-sub">Desarrollo de apps y proyectos de software</div>
+        </div>
+      </div>
+      <div class="gallery-item gal-c fade-in">
+        <div class="gal-inner">
+          <div class="gal-icon">📐</div>
+          <div class="gal-label">Diseño de Planos</div>
+          <div class="gal-sub">Modelado arquitectónico y CAD</div>
+        </div>
+      </div>
+      <div class="gallery-item gal-d fade-in">
+        <div class="gal-inner">
+          <div class="gal-icon">🤖</div>
+          <div class="gal-label">Proyecto de Robótica</div>
+          <div class="gal-sub">Automatización y control industrial</div>
+        </div>
+      </div>
+      <div class="gallery-item gal-e fade-in" style="grid-column: span 2;">
+        <div class="gal-inner">
+          <div class="gal-icon">🎓</div>
+          <div class="gal-label">Feria Vocacional CTP</div>
+          <div class="gal-sub">Cada año presentamos nuestras especialidades a cientos de futuros estudiantes</div>
+        </div>
+      </div>
+      <div class="gallery-item gal-f fade-in">
+        <div class="gal-inner">
+          <div class="gal-icon">🏆</div>
+          <div class="gal-label">Proyectos Ganadores</div>
+          <div class="gal-sub">Reconocimientos a nivel regional y nacional</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACERCA DEL COLEGIO -->
+<section id="acerca">
+  <div class="section-container">
+    <div class="acerca-grid">
+      <div class="acerca-text">
+        <div class="section-header fade-in">
+          <div class="section-tag">Nuestra Historia</div>
+          <h2 class="section-title">Acerca del Colegio</h2>
+          <div class="divider"></div>
+        </div>
+        <p class="acerca-historia fade-in">
+          El CTP Dulce Nombre es un centro educativo técnico ubicado en el distrito de Dulce Nombre de Cartago, Costa Rica, que ofrece formación académica y técnica a estudiantes de la región.
+        </p>
+        <div class="mv-cards fade-in">
+          <div class="mv-card">
+            <div class="mv-icon">🎯</div>
+            <div class="mv-title">Misión</div>
+            <div class="mv-text">Una Dirección Regional renovada y eficiente que apoya a toda la comunidad educativa mediante una gestión transparente, impulsando el desarrollo integral y las habilidades necesarias para una sociedad global.</div>
+          </div>
+          <div class="mv-card">
+            <div class="mv-icon">🔭</div>
+            <div class="mv-title">Visión</div>
+            <div class="mv-text">Ser el colegio técnico de referencia en la región central sur, reconocido por la calidad de sus egresados, innovación pedagógica y vinculación con el sector productivo.</div>
+          </div>
+        </div>
+      </div>
+      <div class="acerca-info fade-in">
+        <div class="info-card">
+          <div class="info-card">
+  <div class="info-card-title">📍 Ubicación</div>
+  <div class="info-card-text">
+    Centro educativo técnico ubicado en el distrito de Dulce Nombre de Cartago, Costa Rica. 
+  </div>
+  
+  <!-- Mapa del CTP Dulce Nombre -->
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d943.435759714856!2d-83.9088661!3d9.8450556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa11fd983253b75%3A0x633513364f9b8830!2sCTP%20Dulce%20Nombre!5e0!3m2!1ses-419!2scr!4v1715720000000!5m2!1ses-419!2scr" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</div>
+        <div class="info-card">
+          <div class="info-card-title">📞 Contacto</div>
+          <div class="info-card-text">Teléfono: 2553-6190<br>Redes sociales: CTP Dulce Nombre Oficial <br>Correo electrónico: ctp.dulcenombre@mep.go.cr</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">🎓 Nivel Académico</div>
+          <div class="info-card-text">Bachillerato técnico en Educación Secundaria y Título de Técnico Medio avalado por el MEP.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">🗓️ Proceso Vocacional 2026</div>
+          <div class="info-card-text">Para estudiantes de décimo año: feria vocacional, talleres, entrevistas y proceso de admisión. Consulta las fechas actualizadas en secretaría.</div>
+        </div>
+        <div class="quote-block">
+          <p class="quote-text">Sean todos bienvenidos. Los invito a conocer las especialidades que ofrecemos y ser parte de nuestra institución.</p>
+          <div class="quote-author">— Alejandra Sánchez Tortos, Directora</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">CTP <span>Dulce Nombre</span></div>
+    <div class="footer-links">
+      <a href="#slider">Inicio</a>
+      <a href="#especialidades">Especialidades</a>
+      <a href="#galeria">Galería</a>
+      <a href="#acerca">Acerca</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    © 2026 Colegio Técnico Profesional Dulce Nombre — Dulce Nombre, Cartago, Costa Rica.
+  </div>
+</footer>
+
+<!-- BOTÓN FLOTANTE REGISTRO -->
+<button id="btnRegistroFlotante" class="btn-registro-flotante" onclick="abrirModal()">
+  <span class="reg-icon">📋</span> Registrarme
+</button>
+
+<!-- MODAL REGISTRO -->
+<div class="modal-overlay" id="modalRegistro">
+  <div class="modal-box">
+
+    <!-- Formulario -->
+    <div id="formView">
+      <div class="modal-header">
+        <button class="modal-close" onclick="cerrarModal()" aria-label="Cerrar">✕</button>
+        <div class="modal-header-tag">Proceso Vocacional 2026</div>
+        <h2>Registro de Interesados</h2>
+        <p>Completá el formulario y te contactaremos con información sobre el proceso de admisión.</p>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-section-label">Datos Personales</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre<span>*</span></label>
+            <input type="text" id="reg-nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label>Apellidos<span>*</span></label>
+            <input type="text" id="reg-apellidos" placeholder="Tus apellidos" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Correo Electrónico<span>*</span></label>
+            <input type="email" id="reg-email" placeholder="correo@ejemplo.com" required>
+          </div>
+          <div class="form-group">
+            <label>Teléfono / WhatsApp<span>*</span></label>
+            <input type="tel" id="reg-telefono" placeholder="8888-0000" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Cédula de Identidad<span>*</span></label>
+            <input type="text" id="reg-cedula" placeholder="1-0000-0000" required>
+          </div>
+          <div class="form-group">
+            <label>Fecha de Nacimiento<span>*</span></label>
+            <input type="date" id="reg-fecha" required>
+          </div>
+        </div>
+
+        <hr class="form-divider">
+        <div class="form-section-label">Información Académica</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Institución de Procedencia<span>*</span></label>
+            <input type="text" id="reg-institucion" placeholder="Nombre del colegio o escuela" required>
+          </div>
+          <div class="form-group">
+            <label>Nivel Actual<span>*</span></label>
+            <select id="reg-nivel" required>
+              <option value="" disabled selected>Seleccioná...</option>
+              <option>Noveno año</option>
+              <option>Décimo año</option>
+              <option>Undécimo año</option>
+              <option>Recién graduado</option>
+              <option>Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="form-divider">
+        <div class="form-section-label">Especialidades de Interés</div>
+        <p style="font-size:0.82rem;color:var(--gray);margin-bottom:12px;">Podés marcar una o varias opciones.</p>
+        <div class="form-check-grid">
+          <label class="form-check">
+            <input type="checkbox" value="Ejecutivo">
+            <span class="form-check-label">📁  Ejecutivo Comercial y servicio al cliente</span>
+          </label>
+          <label class="form-check">
+            <input type="checkbox" value="Ciberseguridad">
+            <span class="form-check-label">🔐 Ciberseguridad</span>
+          </label>
+          <label class="form-check">
+            <input type="checkbox" value="Contabilidad">
+            <span class="form-check-label">📁 Contabilidad</span>
+          </label>
+          <label class="form-check">
+            <input type="checkbox" value="Electrotecnia">
+            <span class="form-check-label">⚡ Electronica Industrial</span>
+          </label>
+          <label class="form-check">
+            <input type="checkbox" value="Dibujo">
+            <span class="form-check-label">🏗️ Dibujo y modelado de edificaciones</span>
+          </label>
+          <label class="form-check">
+            <input type="checkbox" value="Redes">
+            <span class="form-check-label">🌐 Configuracion y soporte de redes de comunicacion y sistema operativos</span>
+          </label>
+          <label class="form-check">
+            <input type="checkbox" value="Desarrollo de Apps Móviles">
+            <span class="form-check-label">📱 Desarrollo de Apps Móviles</span>
+          </label>
+          <label class="form-check">
+            <input type="checkbox" value="Aún no lo sé">
+            <span class="form-check-label">🤔 Aún no lo sé</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label>¿Alguna consulta o comentario?</label>
+          <textarea id="reg-comentario" placeholder="Escribí aquí tus preguntas o información adicional..."></textarea>
+        </div>
+
+        <p id="form-error" style="color:#C72A2A;font-size:0.83rem;margin-bottom:10px;display:none;">
+          ⚠️ Por favor completá todos los campos obligatorios (*).
+        </p>
+
+        <button class="btn-submit" onclick="enviarFormulario()">
+          📩 Enviar Registro
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Vista de éxito -->
+    <div class="modal-success" id="successView">
+      <div class="success-icon">✅</div>
+      <div class="success-title">¡Registro Exitoso!</div>
+      <p class="success-desc">Tus datos han sido enviados. El equipo del CTP Dulce Nombre te contactará pronto con información sobre el proceso vocacional 2026.</p>
+      <button class="btn-close-success" onclick="cerrarModal()">Cerrar</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Mobile menu toggle
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Stagger cards
+  document.querySelectorAll('.esp-card').forEach((card, i) => {
+    card.style.transitionDelay = (i * 0.07) + 's';
+  });
+
+  // ─── MODAL REGISTRO ────────────────────────────────────
+  function abrirModal() {
+    document.getElementById('modalRegistro').classList.add('active');
+    document.getElementById('formView').style.display = 'block';
+    document.getElementById('successView').classList.remove('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function cerrarModal() {
+    document.getElementById('modalRegistro').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Cerrar al hacer clic fuera del modal
+  document.getElementById('modalRegistro').addEventListener('click', function(e) {
+    if (e.target === this) cerrarModal();
+  });
+
+  // Cerrar con Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') cerrarModal();
+  });
+
+  async function enviarFormulario() {
+    const nombre      = document.getElementById('reg-nombre').value.trim();
+    const apellidos   = document.getElementById('reg-apellidos').value.trim();
+    const email       = document.getElementById('reg-email').value.trim();
+    const telefono    = document.getElementById('reg-telefono').value.trim();
+    const cedula      = document.getElementById('reg-cedula').value.trim();
+    const fecha       = document.getElementById('reg-fecha').value;
+    const institucion = document.getElementById('reg-institucion').value.trim();
+    const nivel       = document.getElementById('reg-nivel').value;
+    const errorEl     = document.getElementById('form-error');
+
+    if (!nombre || !apellidos || !email || !telefono || !cedula || !fecha || !institucion || !nivel) {
+      errorEl.style.display = 'block';
+      return;
+    }
+    errorEl.style.display = 'none';
+
+    const especialidades = [...document.querySelectorAll('.form-check input[type="checkbox"]:checked')]
+      .map(cb => cb.value).join(', ');
+    const comentario = document.getElementById('reg-comentario').value.trim();
+
+    const btnSubmit = document.querySelector('.btn-submit');
+    btnSubmit.disabled = true;
+    btnSubmit.innerHTML = '⏳ Enviando...';
+
+    try {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzvH3n922rpvEd5RIrEBAnzwtJXSDGgO8M1FpHR9j6SdpA-w92YYovokx9rtifh4E5ZOw/exec', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          Nombre:                 nombre,
+          Apellidos:              apellidos,
+          Correo:                 email,
+          Telefono:               telefono,
+          Cedula:                 cedula,
+          FechaDeNacimiento:      fecha,
+          InstitucionDeProcedencia: institucion,
+          NivelActual:            nivel,
+          Especialidades:         especialidades || 'Ninguna seleccionada',
+          Comentario:             comentario || 'Sin comentarios'
+        })
+      });
+
+      if (response.ok) {
+        document.getElementById('formView').style.display = 'none';
+        document.getElementById('successView').classList.add('active');
+      } else {
+        errorEl.textContent = '⚠️ Hubo un error al enviar. Intentá de nuevo.';
+        errorEl.style.display = 'block';
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = '📩 Enviar Registro';
+      }
+    } catch (err) {
+      errorEl.textContent = '⚠️ Sin conexión. Revisá tu internet e intentá de nuevo.';
+      errorEl.style.display = 'block';
+      btnSubmit.disabled = false;
+      btnSubmit.innerHTML = '📩 Enviar Registro';
+    }
+  }
+
+  // ─── FIX DEFINITIVO BFCACHE ───────────────────────────────
+  function resetearEstadoPagina() {
+    var modal = document.getElementById('modalRegistro');
+    if (modal) modal.classList.remove('active');
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    var btn = document.getElementById('btnRegistroFlotante');
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.id = 'btnRegistroFlotante';
+      btn.className = 'btn-registro-flotante';
+      btn.innerHTML = '<span class="reg-icon">📋</span> Registrarme';
+      btn.onclick = abrirModal;
+      document.body.appendChild(btn);
+    }
+    btn.style.cssText = 'display:flex !important; visibility:visible !important; opacity:1 !important;';
+  }
+  window.addEventListener('pageshow', function() { resetearEstadoPagina(); });
+  window.addEventListener('load', function() { resetearEstadoPagina(); });
+  window.addEventListener('focus', function() { resetearEstadoPagina(); });
+</script>
+</body>
+</html>
